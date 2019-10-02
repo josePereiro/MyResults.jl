@@ -1,5 +1,5 @@
 module MyResults
 
-# package code goes here
+import FileIO;
 
-end # module
+end  # module Results
