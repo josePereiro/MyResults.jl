@@ -5,7 +5,10 @@ import FileIO;
 include("core/core.jl");
 end  # module Core
 
-# include("inteface/inteface.jl")
+module Interface
+    import Core;
+    include("inteface/inteface.jl")
+end
 
 
 
