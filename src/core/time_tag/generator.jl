@@ -1,4 +1,4 @@
-function generate_time_tag()
+function generate_time_tag()::Int128
     tag = round(Int128, time() * tag_factor);
     if tag <= last_tag
         error("It was generated a ")
