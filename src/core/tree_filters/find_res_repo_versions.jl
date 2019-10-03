@@ -1,5 +1,6 @@
-function find_res_repo_versions_dir_paths(working_dir, res_name)
-    filter = (path) -> isdir(path) &&
-        extract_res_name(basename(path)) == extract_res_name(basename(res_name));
-    return filter_all_subpaths!(working_dir, filter, Vector{AbstractString}());
+function find_res_repo_versions(working_dir, res_name)
+    repos = find_repos(working_dir);
+    filter_fun =
+        (path) -> extract_res_name(basename(path)) == extract_res_name(basename(res_name));
+    return filter(filter_fun, repos);
 end

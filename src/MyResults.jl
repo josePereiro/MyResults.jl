@@ -6,7 +6,7 @@ include("core/core.jl");
 end  # module Core
 
 module Interface
-    import Core;
+    import MyResults.Core;
     include("interface/interface.jl")
 end
 
