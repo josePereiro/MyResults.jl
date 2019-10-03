@@ -5,3 +5,5 @@ include("consts.jl");
 include("validate_res_name.jl");
 include("builder.jl")
 include("extractors.jl");
+include("has_valid_ider.jl");
+include("validate_ider.jl")

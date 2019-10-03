@@ -1,4 +1,6 @@
 function set_working_dir(dir::AbstractString)
-    validate_results_dir(dir);
+    if !isdir(dir)
+        error("$(dir) not found!!!")
+    end
     global working_dir = dir;
 end
