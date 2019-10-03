@@ -7,7 +7,7 @@ end  # module Core
 
 module Interface
     import Core;
-    include("inteface/inteface.jl")
+    include("interface/interface.jl")
 end
 
 
