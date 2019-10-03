@@ -1,6 +1,3 @@
-include("consts.jl")
-
-
 function create_res_repo(working_dir, res_name, data;
         desc_comment = default_desc_comment,
         source_paths = [],
@@ -15,7 +12,7 @@ function create_res_repo(working_dir, res_name, data;
 
     # res_data_file_path
     res_data_file_path = build_res_data_file_path(working_dir, res_name, time_tag);
-    FileIO.save(res_data_file_path, res_data_key, data);
+    save_res_data(res_data_file_path, data)
 
     # res_desc_file_path
     res_desc_file_path = build_res_desc_file_path(working_dir, res_name, time_tag);
@@ -24,6 +21,8 @@ function create_res_repo(working_dir, res_name, data;
     # res_source_dir_path
     res_source_dir_path = build_res_source_dir_path(working_dir, res_name, time_tag);
     mkpath(res_source_dir_path);
+    clear_res_source(res_source_dir_path);
+    copy_res_source(res_source_dir_path, source_paths);
 
     return res_dir_path;
 end
