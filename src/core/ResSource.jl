@@ -13,5 +13,5 @@ end
 
 function set_res_source!(repo::ResRepoTree, sources::Vector)
     clear_res_source!(repo);
-    add_res_source!(repo);
+    add_res_source!(repo, sources);
 end
