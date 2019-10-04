@@ -4,3 +4,4 @@ include("ResRepoTrees/ResRepoTrees.jl");
 include("ResDescs/ResDescs.jl");
 include("ResData/ResData.jl");
 include("ResSource/ResSource.jl");
+include("FileFilters/FileFilters.jl");

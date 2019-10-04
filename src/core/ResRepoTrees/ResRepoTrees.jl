@@ -51,3 +51,11 @@ function is_valid_res_repo_tree(rr::ResRepoTree)
         return true;
     catch return false; end
 end
+
+function is_valid_res_repo_tree(res_dir)
+    try rr = ResRepoTree(res_dir)
+        return is_valid_res_repo_tree(rr);
+    catch return false; end
+end
+
+get_res_name(rr::ResRepoTree) = ResRepoTree.res_name;
