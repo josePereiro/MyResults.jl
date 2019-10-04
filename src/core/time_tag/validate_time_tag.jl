@@ -6,4 +6,5 @@ function validate_time_tag(time_tag)
     elseif !all(isnumber, time_tag)
         error("$(time_tag) must have only numeric chars!!!")
     end
+    return time_tag;
 end
