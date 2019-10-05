@@ -19,10 +19,10 @@ end
 get_desc_log(resdesc::ResDesc) = resdesc.desc_dict[res_desc_log_key];
 get_desc_comment(resdesc::ResDesc) = resdesc.desc_dict[res_desc_comment_key];
 
-add_desc_log_line!(resdesc::ResDesc, log_line::String) =
+add_desc_log_line!(resdesc::ResDesc, log_line::AbstractString) =
     resdesc.desc_dict[res_desc_log_key] *= "$(now()): $(log_line)\n";
 
-set_desc_comment!(resdesc::ResDesc, new_comment::String) =
+set_desc_comment!(resdesc::ResDesc, new_comment::AbstractString) =
     resdesc.desc_dict[res_desc_comment_key] = new_comment;
 
 load_res_desc(repo::ResRepoTree) =

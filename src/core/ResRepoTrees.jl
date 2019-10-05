@@ -32,11 +32,33 @@ ResRepoTree(working_dir, res_name::ResName) = ResRepoTree(working_dir, res_name,
 ResRepoTree(working_dir, res_name) = ResRepoTree(working_dir, ResName(res_name), TimeTag());
 
 function ResRepoTree(res_dir::AbstractString)
-    res_ider = basename(res_dir);
-    res_name = ResName(String(split(res_ider, tt_rn_sep)[1]));
-    time_tag = TimeTag(String(split(res_ider, tt_rn_sep)[2]));
-    return ResRepoTree(dirname(res_dir),
-        res_name, time_tag);
+    validate_res_dir(res_dir);
+    res_name = extract_res_name(res_dir);
+    time_tag = extract_time_tag(res_dir);
+    return ResRepoTree(dirname(res_dir), res_name, time_tag);
+end
+
+function validate_res_dir(res_dir)
+    spt = split(basename(res_dir), tt_rn_sep);
+    if length(spt) != 2 error("'$(basename(res_dir))' is not a valid dir "*
+        "name for a result repocitory") end
+    validate_res_name(spt[1]);
+    validate_time_tag(spt[2]);
+    return res_dir;
+end
+
+function is_valid_res_dir(res_dir)
+    try validate_res_dir(res_dir)
+        return true;
+    catch return false; end
+end
+
+function extract_res_name(res_dir)
+    ResName(String(split(basename(res_dir), tt_rn_sep)[1]));
+end
+
+function extract_time_tag(res_dir)
+    TimeTag(String(split(basename(res_dir), tt_rn_sep)[2]));
 end
 
 function validate_res_repo_tree(rr::ResRepoTree)
@@ -58,4 +80,10 @@ function is_valid_res_repo_tree(res_dir)
     catch return false; end
 end
 
-get_res_name(rr::ResRepoTree) = ResRepoTree.res_name;
+sort_by_time_tag(rrs::Vector{ResRepoTree}) =
+    [rrs[find_by_time_tag(rrs, tt)] for tt in sort!([rr.time_tag for rr in rrs])];
+
+find_by_time_tag(rrs::Vector{ResRepoTree}, tt::Int) =
+    findfirst((rr) -> rr.time_tag == tt, rrs);
+find_by_time_tag(rrs::Vector{ResRepoTree}, tt::TimeTag) =
+    find_by_time_tag(rrs, tt.time_tag);

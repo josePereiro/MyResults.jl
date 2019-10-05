@@ -5,8 +5,8 @@ const allowed_res_name_non_alphanumeric_chars = ['_'];
 # An String representing the Readeble name of the result repo
 #
 struct ResName
-    res_name::String
-    function ResName(resname::String)
+    res_name::AbstractString
+    function ResName(resname::AbstractString)
         validate_res_name(resname);
         new(resname);
     end
@@ -23,4 +23,10 @@ function validate_res_name(res_name::AbstractString)
         end
     end
     return res_name;
+end
+
+function is_valid_res_repo_name(res_name::AbstractString)
+    try validate_res_name(res_name)
+        return true;
+    catch return false; end
 end

@@ -9,7 +9,7 @@ struct TimeTag
 end
 
 TimeTag() = TimeTag(generate_time_tag_int());
-TimeTag(timetag::String) = TimeTag(parse(Int, timetag));
+TimeTag(timetag::AbstractString) = TimeTag(parse(Int, timetag));
 
 Base.string(tt::TimeTag) = string(tt.time_tag);
 
