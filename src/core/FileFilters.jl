@@ -16,13 +16,11 @@ end
 
 function find_repos(working_dir)
     filter_fun = (path) -> isdir(path) && is_valid_res_repo_tree(path);
-    return ResRepoTree.(filter(filter_fun , joinpath.(working_dir, readdir(working_dir))));
+    return Vector{ResRepoTree}(ResRepoTree.(filter(filter_fun , joinpath.(working_dir, readdir(working_dir)))));
 end
 
-find_by_time_tag(working_dir, time_tag::Int) =
-    filter((repo) -> repo.time_tag == time_tag, find_repos(working_dir));
-find_by_time_tag(working_dir, tt::TimeTag) =
-    find_by_time_tag(working_dir, tt.time_tag);
+find_by_time_tag(working_dir, tt::Int) =
+    find_by_time_tag(working_dir, TimeTag(tt));
 
 function filter_over_all_repos(working_dir, filter_fun)
     repos = find_repos(working_dir);
@@ -46,7 +44,6 @@ function find_used_max_time_tag(working_dir)
     end
 end
 
-find_res_repo_versions(working_dir, res_name::AbstractString) =
-    filter((repo) -> repo.res_name == res_name, find_repos(working_dir));
-find_res_repo_versions(working_dir, res_name::ResName) =
-        find_res_repo_versions(working_dir, res_name.res_name);
+find_versions(working_dir, res_name) =
+    sort_by_time_tag(filter((_repo) -> _repo.res_name == res_name,
+        find_repos(working_dir)));

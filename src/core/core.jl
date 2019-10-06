@@ -5,3 +5,5 @@ include("ResDescs.jl");
 include("ResData.jl");
 include("ResSource.jl");
 include("FileFilters.jl");
+include("Validators.jl");
+include("Queries.jl")
