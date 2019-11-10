@@ -13,6 +13,6 @@ end # module Interface
 include("exports.jl");
 include("default_results_dir.jl");
 include("exports.jl");
-set_working_dir(default_results_dir);
+set_working_dir_to_default();
 
 end  # module Results
