@@ -1,14 +1,18 @@
 module MyResults
 
 module Core
-import FileIO;
-include("core/core.jl");
-
+    import FileIO;
+    include("core/core.jl");
 end  # module Core
 
 module Interface
     import MyResults.Core;
     include("interface/interface.jl")
-end
+end # module Interface
+
+include("exports.jl");
+include("default_results_dir.jl");
+include("exports.jl");
+set_working_dir(default_results_dir);
 
 end  # module Results
